@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <h2>Right click and inspect to play in browser console</h2>
+    <script>
+        /* 
+        Notes and planning
+        function game() will have 5 rounds
+        function getComputerChoice() makes random selection of Rock, Paper, or Scissors
+        for user input, use previously written function to convert to correct format
+        use a loop to verify appropriate input (loops not yet taught)
+        Check input and output requirements from project description:
+           1. Each round takes paramenters computerSelection and playerSelection
+           2. Returns a string announcing the winner
+                Note by me: this doesn't seem like the best thing to return
+                   It says I will use this later.
+                   Would be more usable to return only the winner name.
+                   Sample output "You lose! Paper beats Rock."
+        Sample code:
+                   function playRound(playerSelection, computerSelection) {
+                  // your code here!
+                   }
+ 
+                  const playerSelection = "rock";
+                  const computerSelection = getComputerChoice();
+                  console.log(playRound(playerSelection, computerSelection));
+            3. Use prompt() to get input. (sample code uses a test input)
+        Overall algorithm for game:
+          1. Initialize scores to 0.
+          2. Repeat 5 times:
+              a. Play a round
+              b. Announce choices and winner for round.
+              c. Update scores
+          3. Announce final scores
+        Algorithm for round:
+             1. Get computer choice (outside playRound in example)
+             2. Get player choice (outside playRound in example)
+             3. Check for tie
+                 If tie, no change to scores, output tie message
+                   If return here, remainder doesn't need to be wrapped in an else
+                 If computer choice is rock (if)
+                    If my choice is paper
+                       I win (update score and output win message)
+                    If my choice is scissors
+                       I lose (update score and output lose message)
+                If computer choice is paper (else if)
+                    If my choice is scissors
+                       I win (update score and output win message)
+                    If my choice is rock
+                       I lose (update score and output lose message)
+                If computer choice is scissors (doesn't need to be "else" if returned above)
+                    If my choice is rock
+                       I win (update score and output win message)
+                    If my choice is paper
+                       I lose (update score and output lose message)
+                Return a default message for in-progress results
+            Could include winMessage and loseMessage functions
+               tie only occurs once -- function not needed
+                
+        
+        */
+        let capitalize = (str1) => {
+            let slice1 = str1.slice(0, 1).toUpperCase();
+            let slice2 = str1.slice(1).toLowerCase();
+            return slice1 + slice2;
+        }
+        // test capitalize function
+           console.log(capitalize("ROCK"));
+
+       console.log("Verify this displays to console.");
+       // test for loop syntax
+       for (let i = 0; i < 5; i++) {
+        console.log(i);
+       };
+       // test while loop syntax
+       let valid = false;
+       while (!valid) {
+        console.log("in the while loop");
+        valid = true;
+       };
+    </script>
+</body>
+</html>
