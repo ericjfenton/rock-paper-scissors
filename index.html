@@ -65,15 +65,47 @@
                 
         
         */
-        let capitalize = (str1) => {
+       function getComputerChoice() {
+        let choiceIndex = Math.floor(Math.random()*3);
+        if (choiceIndex === 0) {
+            return 'Rock';
+        } else if (choiceIndex === 1) {
+            return 'Paper';
+        }  return 'Scissors';
+       }
+
+       let capitalize = (str1) => {
             let slice1 = str1.slice(0, 1).toUpperCase();
             let slice2 = str1.slice(1).toLowerCase();
             return slice1 + slice2;
         }
-        // test capitalize function
-           console.log(capitalize("ROCK"));
+       
+       function getPlayerChoice() {
+        let valid = false;
+       while (!valid) {
+        let choice = capitalize(prompt("Rock, Paper, or Scissors?"));
+        if (choice === 'Rock' || choice === 'Paper' || choice === 'Scissors') {
+            return choice;
+        }
+       };
+       }
+       let playerSelection = getPlayerChoice();
+       console.log(playerSelection);
 
-       console.log("Verify this displays to console.");
+       function printWinMessage(winThing, loseThing) {
+        console.log(`You win. ${winThing} beats ${loseThing}.`);
+       }
+
+       printWinMessage('Dog', 'Cat');
+
+       function printLoseMessage(winThing, loseThing) {
+        console.log(`You lose. ${winThing} beats ${loseThing}.`);
+       }
+
+       printLoseMessage('Dog', 'Cat');
+
+       
+
        // test for loop syntax
        for (let i = 0; i < 5; i++) {
         console.log(i);
