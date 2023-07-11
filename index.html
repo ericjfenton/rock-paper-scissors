@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            color: darkblue;
+            background-color: lightgray;
+        }
+    </style>
 </head>
 <body>
-    <h1>Rock Paper Scissors</h1>
-    <h2>Right click and choose "inspect" to see results in browser console</h2>
+    <h1>Rock/Paper/Scissors Game</h1>
+    <h2>Right click and choose "inspect" to see results in browser console.</h2>
     <script>
         /* 
         Notes and planning
@@ -65,6 +71,9 @@
                 
         
         */
+
+        // define functions
+
        function getComputerChoice() {
         let choiceIndex = Math.floor(Math.random()*3);
         if (choiceIndex === 0) {
@@ -91,24 +100,51 @@
        }
        
 
-       function printWinMessage(winThing, loseThing) {
-        console.log(`You win. ${winThing} beats ${loseThing}.`);
+       function getWinMessage(winThing, loseThing) {
+          return `You win. ${winThing} beats ${loseThing}.`;
        }
-       printWinMessage('Dog', 'Cat');
 
-       function printLoseMessage(winThing, loseThing) {
-        console.log(`You lose. ${winThing} beats ${loseThing}.`);
+       function getLoseMessage(winThing, loseThing) {
+           return `You lose. ${winThing} beats ${loseThing}.`;
        }
-       printLoseMessage('Dog', 'Cat');
+
 
        function playRound(playerSelection, computerSelection) {
-                  return "You win!";
+          let result;
+          console.log(`Computer chose ${computerSelection}.`);
+          if (playerSelection === computerSelection) {
+            return `Tie! Both chose ${playerSelection}.`;
+          }
+          switch (computerSelection) {
+            case 'Rock':
+                if (playerSelection === 'Paper') {
+                    return getWinMessage(playerSelection, computerSelection);
+                } else {
+                    return getLoseMessage(computerSelection, playerSelection);
+                }
+            case 'Paper':
+                if (playerSelection === 'Scissors') {
+                    return getWinMessage(playerSelection, computerSelection);
+                } else {
+                    return getLoseMessage(computerSelection, playerSelection);
+                }
+            case 'Scissors':
+                if (playerSelection === 'Rock') {
+                    return getWinMessage(playerSelection, computerSelection);
+                } else {
+                    return getLoseMessage(computerSelection, playerSelection);
+                }
+          }
+
+        return "default result - coding in progress"; // tested all options, should not run this
                    }
                   
         function game() {
             let playerScore = 0;
             let computerScore = 0;
             // begin loop here
+            for (let i = 0; i < 5; i++) {
+                console.log(`\nRound ${i + 1}`);
             let playerSelection = getPlayerChoice();
             let computerSelection = getComputerChoice();
             roundResult = playRound(playerSelection, computerSelection);
@@ -119,15 +155,16 @@
                 computerScore++;
             }
             // end loop here
+           };
+            console.log("\nFinal results!");
             console.log(`Your score = ${playerScore}. Computer score = ${computerScore}.`);
         }
+        // end of function definitions
 
+        // announce game, give instructions, play game
+        alert("Welcome to Rock, Paper, Scissors. There will be 5 rounds.");
+        alert("Right click and choose \"inspect\" to see results in browser console.");
         game();
-
-       // test for loop syntax, add last - test for one round
-       for (let i = 0; i < 5; i++) {
-        console.log(i);
-       };
        
     </script>
 </body>
