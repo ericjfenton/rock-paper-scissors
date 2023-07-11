@@ -84,6 +84,9 @@
        }
 
        let capitalize = (str1) => {  // I copied the arrow format from a previous exercise
+            if (str1 === null) {
+                return null; // added checks for null so exit is not forced by error
+            }
             let slice1 = str1.slice(0, 1).toUpperCase(); // first lettter upper case
             let slice2 = str1.slice(1).toLowerCase();  // other letters lower case
             return slice1 + slice2;
@@ -91,13 +94,16 @@
        
        function getPlayerChoice() {
         let valid = false; // assumes bad answer
-       while (!valid) { // keeps looping until good answer entered (not best practice)
-        let choice = capitalize(prompt("Rock, Paper, or Scissors?"));
+       while (!valid) { // keeps looping until good answer or cancel entered
+        let choice = capitalize(prompt("Rock, Paper, or Scissors? (Cancel button to exit)"));
+        if (choice === null) {
+            return null;
+        }
         if (choice === 'Rock' || choice === 'Paper' || choice === 'Scissors') {
             return choice;
         }
-       };
-       }
+       }; // end of while loop
+       }  // end of getPlayerChoice
 
        function getWinMessage(winThing, loseThing) {
           return `You win. ${winThing} beats ${loseThing}.`;
@@ -133,11 +139,11 @@
                 } else { // player chose Paper
                     return getLoseMessage(computerSelection, playerSelection);
                 }
-          }
+            }
 
         return "default result - coding in progress"; // This line was to print an answer
                                                       // when all options had not yet been coded
-                   }
+        }  // end of playRound function
                   
         function game() {
             let playerScore = 0;
@@ -146,6 +152,10 @@
             for (let i = 0; i < 5; i++) {
                 console.log(`\nRound ${i + 1}`); // loops 0 to 4, says round 1 to 5
             let playerSelection = getPlayerChoice();
+            if (playerSelection === null) {
+                console.log("User chose to exit.");
+                return;
+            }
             let computerSelection = getComputerChoice();
             roundResult = playRound(playerSelection, computerSelection);
             console.log(roundResult);
@@ -158,7 +168,7 @@
            };
             console.log("\nFinal results!");
             console.log(`Your score = ${playerScore}. Computer score = ${computerScore}.`);
-        }
+        }  // end of game function
         // end of function definitions
 
         // announce game, give instructions, play game
