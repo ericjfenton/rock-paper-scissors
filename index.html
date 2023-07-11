@@ -67,14 +67,14 @@
                        I lose (update score and output lose message)
                 Return a default message for in-progress results
             Could include winMessage and loseMessage functions
-               tie only occurs once -- function not needed
-                
-        
+               The tie message only occurs once in the algorithm -- tieMessage function isn't needed
         */
 
         // define functions
 
        function getComputerChoice() {
+         // randomly choose 0, 1, or 2
+         // assign rock if 0, paper if 1, scissors if 2
         let choiceIndex = Math.floor(Math.random()*3);
         if (choiceIndex === 0) {
             return 'Rock';
@@ -83,22 +83,21 @@
         }  return 'Scissors';
        }
 
-       let capitalize = (str1) => {  // retained arrow format from previous exercise
-            let slice1 = str1.slice(0, 1).toUpperCase();
-            let slice2 = str1.slice(1).toLowerCase();
+       let capitalize = (str1) => {  // I copied the arrow format from a previous exercise
+            let slice1 = str1.slice(0, 1).toUpperCase(); // first lettter upper case
+            let slice2 = str1.slice(1).toLowerCase();  // other letters lower case
             return slice1 + slice2;
         }
        
        function getPlayerChoice() {
-        let valid = false;
-       while (!valid) {
+        let valid = false; // assumes bad answer
+       while (!valid) { // keeps looping until good answer entered (not best practice)
         let choice = capitalize(prompt("Rock, Paper, or Scissors?"));
         if (choice === 'Rock' || choice === 'Paper' || choice === 'Scissors') {
             return choice;
         }
        };
        }
-       
 
        function getWinMessage(winThing, loseThing) {
           return `You win. ${winThing} beats ${loseThing}.`;
@@ -119,24 +118,25 @@
             case 'Rock':
                 if (playerSelection === 'Paper') {
                     return getWinMessage(playerSelection, computerSelection);
-                } else {
+                } else {  // player chose Scissors, already checked for Rock
                     return getLoseMessage(computerSelection, playerSelection);
                 }
             case 'Paper':
                 if (playerSelection === 'Scissors') {
                     return getWinMessage(playerSelection, computerSelection);
-                } else {
+                } else {  // player chose Rock
                     return getLoseMessage(computerSelection, playerSelection);
                 }
             case 'Scissors':
                 if (playerSelection === 'Rock') {
                     return getWinMessage(playerSelection, computerSelection);
-                } else {
+                } else { // player chose Paper
                     return getLoseMessage(computerSelection, playerSelection);
                 }
           }
 
-        return "default result - coding in progress"; // tested all options, should not run this
+        return "default result - coding in progress"; // This line was to print an answer
+                                                      // when all options had not yet been coded
                    }
                   
         function game() {
@@ -144,7 +144,7 @@
             let computerScore = 0;
             // begin loop here
             for (let i = 0; i < 5; i++) {
-                console.log(`\nRound ${i + 1}`);
+                console.log(`\nRound ${i + 1}`); // loops 0 to 4, says round 1 to 5
             let playerSelection = getPlayerChoice();
             let computerSelection = getComputerChoice();
             roundResult = playRound(playerSelection, computerSelection);
