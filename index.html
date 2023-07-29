@@ -4,75 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors Game</title>
-    <style>
-        body {
-            color: darkblue;
-            background-color: lightgray;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Rock/Paper/Scissors Game</h1>
-    <h2>Right click and choose "Inspect" to see output in the console panel.</h2>
-    <h2>Reload the page to restart the game.</h2>
+    <button id="Rock">Rock</button>
+    <button id="Paper">Paper</button>
+    <button id="Scissors">Scissors</button>
+    <div id="message">Game status will go here</div>
+    
     <script>
+
+function getWinMessage(winThing, loseThing) {
+          return `You win. ${winThing} beats ${loseThing}.`;
+       }
+
+       function getLoseMessage(winThing, loseThing) {
+           return `You lose. ${winThing} beats ${loseThing}.`;
+       }
+
+function getMessage(playerSelection, computerSelection) {
+          let result;
+          console.log(`Computer chose ${computerSelection}.`);
+          if (playerSelection === computerSelection) {
+            return `Tie! Both chose ${playerSelection}.`;
+          }
+          switch (computerSelection) {
+            case 'Rock':
+                if (playerSelection === 'Paper') {
+                    return getWinMessage(playerSelection, computerSelection);
+                } else {  // player chose Scissors, already checked for Rock
+                    return getLoseMessage(computerSelection, playerSelection);
+                }
+            case 'Paper':
+                if (playerSelection === 'Scissors') {
+                    return getWinMessage(playerSelection, computerSelection);
+                } else {  // player chose Rock
+                    return getLoseMessage(computerSelection, playerSelection);
+                }
+            case 'Scissors':
+                if (playerSelection === 'Rock') {
+                    return getWinMessage(playerSelection, computerSelection);
+                } else { // player chose Paper
+                    return getLoseMessage(computerSelection, playerSelection);
+                }
+            }
+
+        return "default result - coding in progress"; // This line was to print an answer
+                                                      // when all options had not yet been coded
+        }  // end of getMessage function
+
+function getComputerChoice() {
+         
+        let choiceIndex = Math.floor(Math.random()*3);
+        if (choiceIndex === 0) {
+            return 'Rock';
+        } else if (choiceIndex === 1) {
+            return 'Paper';
+        }  return 'Scissors';
+       }
+
+        function playRound(e) {
+            console.log(e.target.id);
+            let computerSelection = getComputerChoice();
+            let playerSelection = e.target.id;
+            message.innerText = getMessage(playerSelection, computerSelection);
+        }
+
+        const buttons = document.querySelectorAll('button');
+        const message = document.getElementById('message');
+        buttons.forEach(button => addEventListener('click', playRound));
         /* 
         Notes and planning
-        function game() will have 5 rounds
-        function getComputerChoice() makes random selection of Rock, Paper, or Scissors
-        for user input, use previously written function to convert to correct format
-        use a loop to verify appropriate input (loops not yet taught)
-        Check input and output requirements from project description:
-           1. Each round takes paramenters computerSelection and playerSelection
-           2. Returns a string announcing the winner
-                Note by me: this doesn't seem like the best thing to return
-                   It says I will use this later.
-                   Would be more usable to return only the winner name.
-                   Sample output "You lose! Paper beats Rock."
-        Sample code:
-                   function playRound(playerSelection, computerSelection) {
-                  // your code here!
-                   }
+        Comment out old code and add back as needed       
  
-                  const playerSelection = "rock";
-                  const computerSelection = getComputerChoice();
-                  console.log(playRound(playerSelection, computerSelection));
-            3. Use prompt() to get input. (sample code uses a test input)
-        Overall algorithm for game:
-          1. Initialize scores to 0.
-          2. Repeat 5 times:
-              a. Play a round
-              b. Announce choices and winner for round.
-              c. Update scores
-          3. Announce final scores
-        Algorithm for round:
-             1. Get computer choice (outside playRound in example)
-             2. Get player choice (outside playRound in example)
-             3. Check for tie
-                 If tie, no change to scores, output tie message
-                   If return here, remainder doesn't need to be wrapped in an else
-                 If computer choice is rock (if)
-                    If my choice is paper
-                       I win (update score and output win message)
-                    If my choice is scissors
-                       I lose (update score and output lose message)
-                If computer choice is paper (else if)
-                    If my choice is scissors
-                       I win (update score and output win message)
-                    If my choice is rock
-                       I lose (update score and output lose message)
-                If computer choice is scissors (doesn't need to be "else" if returned above)
-                    If my choice is rock
-                       I win (update score and output win message)
-                    If my choice is paper
-                       I lose (update score and output lose message)
-                Return a default message for in-progress results
-            Could include winMessage and loseMessage functions
-               The tie message only occurs once in the algorithm -- tieMessage function isn't needed
         */
 
         // define functions
 
+       /*
        function getComputerChoice() {
          // randomly choose 0, 1, or 2
          // assign rock if 0, paper if 1, scissors if 2
@@ -115,7 +125,7 @@
        }
 
 
-       function playRound(playerSelection, computerSelection) {
+       function getMessage(playerSelection, computerSelection) {
           let result;
           console.log(`Computer chose ${computerSelection}.`);
           if (playerSelection === computerSelection) {
@@ -176,6 +186,7 @@
         alert("Welcome to Rock, Paper, Scissors. There will be 5 rounds.");
         alert("\"Cancel\" out of the first game, then right click and choose \"Inspect\" to view output in the console panel.");
         game();
+        */
        
     </script>
 </body>

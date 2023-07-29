@@ -1,0 +1,9 @@
+body {
+    color: darkblue;
+    background-color: lightgray;
+    text-align: center;
+}
+
+#message {
+    margin-top: 10px;
+}
