@@ -11,7 +11,9 @@
     <button id="Rock">Rock</button>
     <button id="Paper">Paper</button>
     <button id="Scissors">Scissors</button>
-    <div id="message">Game status will go here</div>
+    <div id="playerInput"></div>
+    <div id="computerInput"></div>
+    <div id="message">Choose one!</div>
     
     <script>
 
@@ -49,9 +51,6 @@ function getMessage(playerSelection, computerSelection) {
                     return getLoseMessage(computerSelection, playerSelection);
                 }
             }
-
-        return "default result - coding in progress"; // This line was to print an answer
-                                                      // when all options had not yet been coded
         }  // end of getMessage function
 
 function getComputerChoice() {
@@ -65,13 +64,21 @@ function getComputerChoice() {
        }
 
         function playRound(e) {
+            // add logic to count score
+            // when a score gets to 5, give results,
+            // stop playing and tell user to
+            // refresh page
             console.log(e.target.id);
             let computerSelection = getComputerChoice();
+            computerInput.innerText = `Computer chose ${computerSelection}.`;
             let playerSelection = e.target.id;
+            playerInput.innerText = `You chose ${playerSelection}.`;
             message.innerText = getMessage(playerSelection, computerSelection);
         }
 
         const buttons = document.querySelectorAll('button');
+        const playerInput = document.getElementById('playerInput');
+        const computerInput = document.getElementById('computerInput');
         const message = document.getElementById('message');
         buttons.forEach(button => addEventListener('click', playRound));
         /* 
@@ -83,78 +90,10 @@ function getComputerChoice() {
         // define functions
 
        /*
-       function getComputerChoice() {
-         // randomly choose 0, 1, or 2
-         // assign rock if 0, paper if 1, scissors if 2
-        let choiceIndex = Math.floor(Math.random()*3);
-        if (choiceIndex === 0) {
-            return 'Rock';
-        } else if (choiceIndex === 1) {
-            return 'Paper';
-        }  return 'Scissors';
-       }
-
-       let capitalize = (str1) => {  // I copied the arrow format from a previous exercise
-            if (str1 === null) {
-                return null; // added checks for null so exit is not forced by error
-            }
-            let slice1 = str1.slice(0, 1).toUpperCase(); // first lettter upper case
-            let slice2 = str1.slice(1).toLowerCase();  // other letters lower case
-            return slice1 + slice2;
-        }
        
-       function getPlayerChoice() {
-        let valid = false; // assumes bad answer
-       while (!valid) { // keeps looping until good answer or cancel entered
-        let choice = capitalize(prompt("Rock, Paper, or Scissors? (Cancel button to exit)"));
-        if (choice === null) {
-            return null;
-        }
-        if (choice === 'Rock' || choice === 'Paper' || choice === 'Scissors') {
-            return choice;
-        }
-       }; // end of while loop
-       }  // end of getPlayerChoice
-
-       function getWinMessage(winThing, loseThing) {
-          return `You win. ${winThing} beats ${loseThing}.`;
-       }
-
-       function getLoseMessage(winThing, loseThing) {
-           return `You lose. ${winThing} beats ${loseThing}.`;
-       }
 
 
-       function getMessage(playerSelection, computerSelection) {
-          let result;
-          console.log(`Computer chose ${computerSelection}.`);
-          if (playerSelection === computerSelection) {
-            return `Tie! Both chose ${playerSelection}.`;
-          }
-          switch (computerSelection) {
-            case 'Rock':
-                if (playerSelection === 'Paper') {
-                    return getWinMessage(playerSelection, computerSelection);
-                } else {  // player chose Scissors, already checked for Rock
-                    return getLoseMessage(computerSelection, playerSelection);
-                }
-            case 'Paper':
-                if (playerSelection === 'Scissors') {
-                    return getWinMessage(playerSelection, computerSelection);
-                } else {  // player chose Rock
-                    return getLoseMessage(computerSelection, playerSelection);
-                }
-            case 'Scissors':
-                if (playerSelection === 'Rock') {
-                    return getWinMessage(playerSelection, computerSelection);
-                } else { // player chose Paper
-                    return getLoseMessage(computerSelection, playerSelection);
-                }
-            }
-
-        return "default result - coding in progress"; // This line was to print an answer
-                                                      // when all options had not yet been coded
-        }  // end of playRound function
+       
                   
         function game() {
             let playerScore = 0;
