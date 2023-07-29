@@ -14,6 +14,9 @@
     <div id="playerInput"></div>
     <div id="computerInput"></div>
     <div id="message">Choose one!</div>
+    <div id="scores"></div>
+    <div id="finalResult"></div>
+    <div id="restartMessage"></div>
     
     <script>
 
@@ -27,7 +30,7 @@ function getWinMessage(winThing, loseThing) {
 
 function getMessage(playerSelection, computerSelection) {
           let result;
-          console.log(`Computer chose ${computerSelection}.`);
+          //console.log(`Computer chose ${computerSelection}.`);
           if (playerSelection === computerSelection) {
             return `Tie! Both chose ${playerSelection}.`;
           }
@@ -68,18 +71,42 @@ function getComputerChoice() {
             // when a score gets to 5, give results,
             // stop playing and tell user to
             // refresh page
-            console.log(e.target.id);
+            if (playerScore >= 5 || computerScore >= 5) {
+                restartMessage.innerText = "Reload page to restart.";
+            } else {
+            //console.log(e.target.id);
             let computerSelection = getComputerChoice();
             computerInput.innerText = `Computer chose ${computerSelection}.`;
             let playerSelection = e.target.id;
             playerInput.innerText = `You chose ${playerSelection}.`;
-            message.innerText = getMessage(playerSelection, computerSelection);
+            roundResult = getMessage(playerSelection, computerSelection);
+            message.innerText = roundResult;
+            if (roundResult.includes("win")) {
+                playerScore++;
+            } else if (roundResult.includes("lose")) {
+                computerScore++;
+            }
+            scores.innerText = `Your score: ${playerScore}. Computer score: ${computerScore}.`;
+            if (playerScore === 5) {
+                finalResult.innerText = 'You are the overall winner.';
+            }    
+            if (computerScore === 5) {
+                finalResult.innerText = 'The computer is the overall winner.';
+            }   
+        
+        } // end of else
         }
 
+
+        let playerScore = 0;
+        let computerScore = 0;
         const buttons = document.querySelectorAll('button');
         const playerInput = document.getElementById('playerInput');
         const computerInput = document.getElementById('computerInput');
         const message = document.getElementById('message');
+        const scores = document.getElementById('scores');
+        const finalResult = document.getElementById('finalResult')
+        const restartMessage = document.getElementById('restartMessage')
         buttons.forEach(button => addEventListener('click', playRound));
         /* 
         Notes and planning
