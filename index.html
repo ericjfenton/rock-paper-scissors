@@ -56,8 +56,7 @@ function getMessage(playerSelection, computerSelection) {
             }
         }  // end of getMessage function
 
-function getComputerChoice() {
-         
+function getComputerChoice() {    
         let choiceIndex = Math.floor(Math.random()*3);
         if (choiceIndex === 0) {
             return 'Rock';
@@ -67,14 +66,9 @@ function getComputerChoice() {
        }
 
         function playRound(e) {
-            // add logic to count score
-            // when a score gets to 5, give results,
-            // stop playing and tell user to
-            // refresh page
             if (playerScore >= 5 || computerScore >= 5) {
                 restartMessage.innerText = "Reload page to restart.";
             } else {
-            //console.log(e.target.id);
             let computerSelection = getComputerChoice();
             computerInput.innerText = `Computer chose ${computerSelection}.`;
             let playerSelection = e.target.id;
@@ -93,10 +87,8 @@ function getComputerChoice() {
             if (computerScore === 5) {
                 finalResult.innerText = 'The computer is the overall winner.';
             }   
-        
         } // end of else
         }
-
 
         let playerScore = 0;
         let computerScore = 0;
@@ -108,51 +100,6 @@ function getComputerChoice() {
         const finalResult = document.getElementById('finalResult')
         const restartMessage = document.getElementById('restartMessage')
         buttons.forEach(button => addEventListener('click', playRound));
-        /* 
-        Notes and planning
-        Comment out old code and add back as needed       
- 
-        */
-
-        // define functions
-
-       /*
-       
-
-
-       
-                  
-        function game() {
-            let playerScore = 0;
-            let computerScore = 0;
-            // begin loop here
-            for (let i = 0; i < 5; i++) {
-                console.log(`\nRound ${i + 1}`); // loops 0 to 4, says round 1 to 5
-            let playerSelection = getPlayerChoice();
-            if (playerSelection === null) {
-                console.log("User chose to exit.");
-                return;
-            }
-            let computerSelection = getComputerChoice();
-            roundResult = playRound(playerSelection, computerSelection);
-            console.log(roundResult);
-            if (roundResult.includes("win")) {
-                playerScore++;
-            } else if (roundResult.includes("lose")) {
-                computerScore++;
-            }
-            // end loop here
-           };
-            console.log("\nFinal results!");
-            console.log(`Your score = ${playerScore}. Computer score = ${computerScore}.`);
-        }  // end of game function
-        // end of function definitions
-
-        // announce game, give instructions, play game
-        alert("Welcome to Rock, Paper, Scissors. There will be 5 rounds.");
-        alert("\"Cancel\" out of the first game, then right click and choose \"Inspect\" to view output in the console panel.");
-        game();
-        */
        
     </script>
 </body>
